@@ -1,0 +1,8 @@
+.App {
+  text-align: center;
+  padding: 5%; /* Adjust the padding as needed */
+  font-family: Arial, sans-serif;
+  width: 20%; /* Set the width to 80% of the parent container */
+  height: 80vh; /* Set the height to 80% of the viewport height */
+  margin: auto; /* Center the container horizontally */
+}
