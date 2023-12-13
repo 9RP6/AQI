@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div>
       <h1>Multi-File Line Chart App</h1>
-      <LineChart fileNames={['a.csv',]} />
+      <LineChart fileNames={['a.csv','b.csv','c.csv']} />
     </div>
   );
 };
