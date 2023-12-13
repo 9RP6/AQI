@@ -1,12 +1,23 @@
-// App.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LineChart from './linechart';
+import fileList from './filelist.json'; // Import the JSON directly
 
 const App = () => {
+  const [fileListData, setFileListData] = useState([]);
+
+  useEffect(() => {
+    // No need to use fetch, fileList is already the JSON object
+    setFileListData(fileList);
+  }, []);
+
   return (
     <div>
       <h1>Multi-File Line Chart App</h1>
-      <LineChart fileNames={['a.csv','b.csv','c.csv']} />
+      {fileListData.length > 0 ? (
+        <LineChart fileNames={fileListData} />
+      ) : (
+        <p>Loading file list...</p>
+      )}
     </div>
   );
 };

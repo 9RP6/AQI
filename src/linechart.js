@@ -1,4 +1,3 @@
-// LineChart.js
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import TemperatureChart from './TemperatureChart';
@@ -14,12 +13,23 @@ const LineChart = ({ fileNames }) => {
       try {
         const fetchDataFromCSV = async (fileName) => {
           const response = await fetch(fileName);
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch ${fileName}`);
+          }
+
           const text = await response.text();
           const result = Papa.parse(text, { header: true });
+
+          if (result.errors.length > 0) {
+            console.warn(`Parsing errors for ${fileName}:`, result.errors);
+          }
+
           return result.data;
         };
 
         const allData = await Promise.all(fileNames.map(fetchDataFromCSV));
+
         // Combine data from multiple files into a single array
         const combinedData = allData.reduce((acc, data) => acc.concat(data), []);
         setChartData(combinedData);
