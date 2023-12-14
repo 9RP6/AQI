@@ -12,6 +12,11 @@ const PMChart = ({ chartData }) => {
     },
   };
 
+  // Extract the last data point for each PM value
+  const lastPM1DataPoint = chartData.length > 0 ? chartData[chartData.length - 1].pm1_0_cf_1 : null;
+  const lastPM25DataPoint = chartData.length > 0 ? chartData[chartData.length - 1].pm2_5_cf_1 : null;
+  const lastPM10DataPoint = chartData.length > 0 ? chartData[chartData.length - 1].pm10_0_cf_1 : null;
+
   const pm1Data = [
     ['Time', 'PM1.0'],
     ...chartData.map((row) => [row.UTCDateTime, parseFloat(row.pm1_0_cf_1)]),
@@ -43,6 +48,9 @@ const PMChart = ({ chartData }) => {
           margin: -10, // Set a negative margin value for closer spacing
         }}
       />
+      {lastPM1DataPoint && (
+        <p>Last Recorded PM1.0 Value: {lastPM1DataPoint} at {chartData[chartData.length - 1].UTCDateTime}</p>
+      )}
 
       {/* PM2.5 Chart */}
       <Chart
@@ -58,6 +66,9 @@ const PMChart = ({ chartData }) => {
           margin: -10, // Set a negative margin value for closer spacing
         }}
       />
+      {lastPM25DataPoint && (
+        <p>Last Recorded PM2.5 Value: {lastPM25DataPoint} at {chartData[chartData.length - 1].UTCDateTime}</p>
+      )}
 
       {/* PM10.0 Chart */}
       <Chart
@@ -73,6 +84,9 @@ const PMChart = ({ chartData }) => {
           margin: -20, // Set a negative margin value for closer spacing
         }}
       />
+      {lastPM10DataPoint && (
+        <p>Last Recorded PM10.0 Value: {lastPM10DataPoint} at {chartData[chartData.length - 1].UTCDateTime}</p>
+      )}
     </div>
   );
 };

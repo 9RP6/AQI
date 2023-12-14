@@ -11,7 +11,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <h1>Multi-File Line Chart App</h1>
       {fileListData.length > 0 ? (
         <LineChart fileNames={fileListData} />

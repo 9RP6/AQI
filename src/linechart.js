@@ -1,3 +1,4 @@
+// LineChart.js
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import TemperatureChart from './TemperatureChart';
@@ -41,37 +42,48 @@ const LineChart = ({ fileNames }) => {
     fetchData();
   }, [fileNames]);
 
-  const chartStyle = {
-    width: '33%', // 3 columns in a row
-    height: '33vh', // 2 rows in a column
-    marginBottom: '20px',
+  const columnStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1', // Distribute equal space for both columns
+    minWidth: '300px', // Minimum width to prevent charts from getting too small
+    margin: '10px',
+    padding: '20px',
+    borderRadius: '8px',
     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+    fontFamily: 'Arial, sans-serif', // Change the font to a suitable one
   };
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {/* Temperature Chart */}
-      <div style={chartStyle}>
-        <h2>Temperature Chart</h2>
-        <TemperatureChart chartData={chartData} />
+    <div style={{ display: 'flex', flexWrap: 'wrap', fontFamily: 'Arial, sans-serif' }}>
+      {/* Temperature, Humidity, and Pressure Charts */}
+      <div style={columnStyle}>
+        {/* Temperature Chart */}
+        <div>
+          <h2>Temperature</h2>
+          <TemperatureChart chartData={chartData} />
+        </div>
+
+        {/* Humidity Chart */}
+        <div>
+          <h2>Humidity</h2>
+          <HumidityChart chartData={chartData} />
+        </div>
+
+        {/* Pressure Chart */}
+        <div>
+          <h2>Pressure</h2>
+          <PressureChart chartData={chartData} />
+        </div>
       </div>
 
-      {/* Humidity Chart */}
-      <div style={chartStyle}>
-        <h2>Humidity Chart</h2>
-        <HumidityChart chartData={chartData} />
-      </div>
-
-      {/* Pressure Chart */}
-      <div style={chartStyle}>
-        <h2>Pressure Chart</h2>
-        <PressureChart chartData={chartData} />
-      </div>
-
-      {/* PM Chart */}
-      <div style={chartStyle}>
-        <h2>PM Chart</h2>
-        <PMChart chartData={chartData} />
+      {/* PM Charts */}
+      <div style={columnStyle}>
+        {/* Combined PM Chart */}
+        <div>
+          <h2>Combined PM's</h2>
+          <PMChart chartData={chartData} />
+        </div>
       </div>
     </div>
   );
